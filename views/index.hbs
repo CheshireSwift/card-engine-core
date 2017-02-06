@@ -1,2 +1,80 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+<div id="react-app"></div>
+<script>
+var dbg = (x => {console.log(x); return x})
+
+var contacts = [
+  { key: 1, name: 'Alan Abbotson', email: 'a@a.a', description: 'Front-end Unicorn' },
+  { key: 2, name: 'Betsy Bobson', email: 'b@b.b' },
+  { key: 3, name: 'Cara Carrotson' }
+]
+
+var ContactItem = React.createClass({
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    email: React.PropTypes.string.isRequired,
+    description: React.PropTypes.string
+  },
+  render: function() {
+    return React.createElement('li', {},
+      React.createElement('h2', {}, this.props.name),
+      React.createElement('a', { href: 'mailto:' + this.props.email }, this.props.email),
+      React.createElement('div', {}, this.props.description)
+    )
+  }
+})
+
+var ContactList = React.createClass({
+  propTypes: {
+    contacts: React.PropTypes.array.isRequired
+  },
+  render: function() {
+    return React.createElement('div', {},
+      React.createElement('h1', {}, 'Contacts'),
+      React.createElement('ul', {},
+        _(this.props.contacts)
+          .filter(c => c.email)
+          .map(c => React.createElement(ContactItem, c))
+          .value()
+      )
+    )
+  }
+})
+
+var ContactForm = React.createClass({
+  propTypes: {
+    contact: React.PropTypes.object.isRequired
+  },
+  render: function() {
+    return React.createElement('form', {},
+      React.createElement('div', { className: 'row' },
+        React.createElement('input', {
+          className: 'six columns',
+          type: 'text',
+          placeholder: 'Name',
+          value: this.props.contact.name
+        }),
+        React.createElement('input', {
+          className: 'six columns',
+          type: 'email',
+          placeholder: 'E-mail',
+          value: this.props.contact.email
+        })
+      ),
+      React.createElement('textarea', {
+        className: 'u-full-width',
+        placeholder: 'Description',
+        value: this.props.contact.description
+      }),
+      React.createElement('button', { className: 'u-full-width', type: 'submit' }, 'Add Contact')
+    )
+  }
+})
+
+ReactDOM.render(
+  React.createElement('div', {},
+    React.createElement(ContactList, { contacts }),
+    React.createElement(ContactForm, { contact: {} })
+  ), document.getElementById('react-app'))
+</script>
