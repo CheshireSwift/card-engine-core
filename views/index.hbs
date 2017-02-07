@@ -44,37 +44,66 @@ var ContactList = React.createClass({
 
 var ContactForm = React.createClass({
   propTypes: {
-    contact: React.PropTypes.object.isRequired
+    model: React.PropTypes.object.isRequired,
+    onChange: React.PropTypes.func.isRequired
+  },
+  updateContact: function(field) {
+    return e => {
+      _.assign(this.props.model.newContact, {
+        [field]: e.target.value
+      })
+      this.props.onChange(this.props.model)
+    }
+  },
+  createContact: function() {
+    var newContact = this.props.model.newContact
+    newContact.key = this.props.model.contacts.length
+    this.props.model.contacts.push(newContact)
+    this.resetContact()
+    this.props.onChange(this.props.model)
+  },
+  resetContact: function() {
+    this.props.model.newContact = { name: '', email: '', description: '' }
   },
   render: function() {
+    if (!this.props.model.newContact) { this.resetContact() }
     return React.createElement('form', {},
       React.createElement('div', { className: 'row' },
         React.createElement('input', {
           className: 'six columns',
           type: 'text',
           placeholder: 'Name',
-          value: this.props.contact.name
+          value: this.props.model.newContact.name,
+          onChange: this.updateContact('name')
         }),
         React.createElement('input', {
           className: 'six columns',
           type: 'email',
           placeholder: 'E-mail',
-          value: this.props.contact.email
+          value: this.props.model.newContact.email,
+          onChange: this.updateContact('email')
         })
       ),
       React.createElement('textarea', {
         className: 'u-full-width',
         placeholder: 'Description',
-        value: this.props.contact.description
+        value: this.props.model.newContact.description,
+        onChange: this.updateContact('description')
       }),
-      React.createElement('button', { className: 'u-full-width', type: 'submit' }, 'Add Contact')
+      React.createElement('button', {
+        className: 'u-full-width',
+        type: 'button',
+        onClick: this.createContact
+      }, 'Add Contact')
     )
   }
 })
 
-ReactDOM.render(
-  React.createElement('div', {},
-    React.createElement(ContactList, { contacts }),
-    React.createElement(ContactForm, { contact: {} })
+function fullRender(model) {
+  ReactDOM.render(React.createElement('div', {},
+    React.createElement(ContactList, { contacts: model.contacts }),
+    React.createElement(ContactForm, { model, onChange: function(model) { fullRender(model) }})
   ), document.getElementById('react-app'))
+}
+fullRender({ contacts })
 </script>
