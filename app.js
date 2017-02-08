@@ -27,7 +27,7 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/js', require('browserify-middleware')(path.join(__dirname, 'client')))
+app.use('/js', require('browserify-middleware')(path.join(__dirname, 'client'), { transform: 'vueify' }))
 
 app.use('/', index);
 app.use('/users', users);
