@@ -8,11 +8,13 @@
     "ci": "npm run stryker | tee /dev/tty | grep 'Mutation score based on covered code: 100'"
   },
   "dependencies": {
+    "babel-preset-react": "^6.23.0",
     "body-parser": "~1.15.2",
     "browserify-middleware": "^7.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.14.0",
+    "express-babelify-middleware": "^0.2.1",
     "hbs": "~4.0.1",
     "morgan": "~1.7.0",
     "node-sass-middleware": "0.9.8",
