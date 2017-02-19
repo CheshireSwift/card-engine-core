@@ -8,6 +8,7 @@
     "ci": "npm run stryker | tee /dev/tty | grep 'Mutation score based on covered code: 100'"
   },
   "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
     "body-parser": "~1.15.2",
     "browserify-middleware": "^7.1.0",
     "cookie-parser": "~1.4.3",
@@ -16,7 +17,9 @@
     "hbs": "~4.0.1",
     "morgan": "~1.7.0",
     "node-sass-middleware": "0.9.8",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "vue": "^2.1.10",
+    "vueify": "^9.4.0"
   },
   "devDependencies": {
     "mocha": "^3.2.0",
