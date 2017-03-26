@@ -12,6 +12,8 @@ var game = require('./routes/game');
 var app = express();
 
 // view engine setup
+var hbs = require('hbs');
+hbs.registerPartials(path.join(__dirname, 'plugin', 'views'))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
