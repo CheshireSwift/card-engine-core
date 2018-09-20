@@ -1,2 +1,2 @@
-[![Stories in Ready](https://badge.waffle.io/CheshireSwift/card-engine-core.png?label=ready&title=Ready)](https://waffle.io/CheshireSwift/card-engine-core)
+[![Stories in Ready](https://badge.waffle.io/CheshireSwift/card-engine-core.png?label=ready&title=Ready)](https://waffle.io/CheshireSwift/card-engine-core) [![Greenkeeper badge](https://badges.greenkeeper.io/CheshireSwift/card-engine-core.svg)](https://greenkeeper.io/)
 # card-engine-core
